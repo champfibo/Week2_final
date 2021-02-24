@@ -47,6 +47,7 @@ UART_HandleTypeDef huart2;
 uint16_t ButtonMatrixState = 0;
 uint32_t ButtonMatrixTimeStamp = 0;
 int count =1;
+int a=0;
 
 /* USER CODE END PV */
 
@@ -306,35 +307,35 @@ void ButtonMatrixUpdate()
 
   if (ButtonMatrixState == 64 && count == 1&& ButtonMatrixState != 0)
    {
- 	  //ans =((ans << 11)||0b10000000000);
+
  	  count = 2;
 
 
    }
    else if (ButtonMatrixState == 512 && count ==2 && ButtonMatrixState != 0)
      {
- 	  //ans =(ans )||0b11000000000;
+
  	  count = 3;
 
      }
    else if (ButtonMatrixState == 1024 && count ==3 && ButtonMatrixState  != 0)
       {
-  	  //ans =((ans )||0b11100000000);
+
   	 count +=1;
       }
    else if (ButtonMatrixState == 16 && count ==4 && ButtonMatrixState  != 0)
         {
-    	  //ans =(ans )||0b11110000000;
+
     	count +=1;
         }
    else if (ButtonMatrixState == 4096 && count ==5 && ButtonMatrixState  != 0)
           {
-      	  //ans =(ans )||0b11111000000;
+
       	 count +=1;
           }
    else if (ButtonMatrixState == 32 && count ==6 && ButtonMatrixState  != 0)
             {
-        	  //ans =(ans)||0b11111100000;
+
         	count +=1;
             }
    else if (ButtonMatrixState == 4096 && count ==7 &&ButtonMatrixState  != 0)
@@ -374,7 +375,12 @@ void ButtonMatrixUpdate()
                   {
 
               	  count=1;
+              	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
                   }
+   else if (ButtonMatrixState != 0)
+   {
+	   a=1;
+   }
 
 
  }
